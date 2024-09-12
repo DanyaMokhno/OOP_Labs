@@ -8,7 +8,7 @@ public class Main {
     /**
      * Точка входа в программу. Выполняет сортировку заранее заданного массива.
      *
-     *  @param args аргументы командной строки (в данном случае не используются)
+     * @param args аргументы командной строки (в данном случае не используются)
      */
     public static void main(String[] args) {
         // целочисленный массив
@@ -34,8 +34,8 @@ public class Main {
      * Функция быстрой сортировки
      *
      * @param arr массив чисел
-     * @param b правая граница массива
-     * @param e левая граница массива
+     * @param b   правая граница массива
+     * @param e   левая граница массива
      */
     public static void sort(int[] arr, int b, int e) {
         int left = b, right = e, middle;
@@ -46,7 +46,7 @@ public class Main {
         while (left <= right) {
             while (arr[left] < middle) left++;
             while (arr[right] > middle) right--;
-            if(left<=right) swap(arr, left++, right--);
+            if (left <= right) swap(arr, left++, right--);
         }
 
         // Рекурсивная сортировка подмассивов
@@ -58,11 +58,10 @@ public class Main {
      * Функция смены местами двух элементов массива
      *
      * @param arr массив, в котором происходит замена
-     * @param i индекс первого элемента
-     * @param j индекс второго элемента
+     * @param i   индекс первого элемента
+     * @param j   индекс второго элемента
      */
-    static void swap(int[] arr, int i, int j)
-    {
+    static void swap(int[] arr, int i, int j) {
         int temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
