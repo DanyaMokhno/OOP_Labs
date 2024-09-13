@@ -34,8 +34,8 @@ public class Main {
      * Функция быстрой сортировки
      *
      * @param arr массив чисел
-     * @param b   правая граница массива
-     * @param e   левая граница массива
+     * @param b   левая граница массива
+     * @param e   правая граница массива
      */
     public static void sort(int[] arr, int b, int e) {
         int left = b, right = e, middle;
