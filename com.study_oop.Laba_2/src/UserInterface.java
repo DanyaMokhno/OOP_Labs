@@ -54,7 +54,6 @@ public class UserInterface {
             window.setIconImage(icon);
         }
 
-
         // Устанавливаем панель
         panel = new JPanel();
         panel.setBackground(new Color(216, 240, 211));
