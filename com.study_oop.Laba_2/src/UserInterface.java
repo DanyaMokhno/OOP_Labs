@@ -48,12 +48,12 @@ public class UserInterface {
         // Добавление иконки
         icon = window.getToolkit().getImage(getClass().getResource("/img/icon.png"));
         if (System.getProperty("os.name").toLowerCase().contains("mac")) {
-            com.apple.eawt.Application.getApplication().setDockIconImage(icon);
+            Taskbar.getTaskbar().setIconImage(icon);
             System.setProperty("apple.laf.useScreenMenuBar", "true");
-
-        }
-        else
+        } else {
             window.setIconImage(icon);
+        }
+
 
         // Устанавливаем панель
         panel = new JPanel();
