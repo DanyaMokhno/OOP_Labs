@@ -4,6 +4,7 @@
  * @author Даниил Мохно 3312
  * @version 1.0
  */
+
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.table.DefaultTableModel;
@@ -36,9 +37,9 @@ public class UserInterface {
     /**
      * Метод для отображения окна приложения
      */
-    public void show(){
+    public void show() {
         if (System.getProperty("os.name").toLowerCase().contains("mac"))
-            System.setProperty( "apple.awt.application.name", "Поликлиника" );
+            System.setProperty("apple.awt.application.name", "Поликлиника");
         // Создание основного окна
         window = new JFrame("Поликлиника");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,6 +60,19 @@ public class UserInterface {
         panel.setBackground(new Color(216, 240, 211));
         panel.setLayout(new BorderLayout());
 
+        // Создание меню
+        menuBar = new JMenuBar();
+        String[] menus = {"File", "Edit", "View", "Help"};
+        String[][] menuItems = {{"Open file", "Save", "Save as", "Print"}, {"Add", "Delete"}};
+        for (int i = 0; i < menus.length; i++) {
+            JMenu menu = new JMenu(menus[i]);
+            for (int j = 0; menuItems.length > i && j < menuItems[i].length; j++) {
+//                item.addActionListener(e -> {})
+                menu.add(new JMenuItem(menuItems[i][j]));
+            }
+            menuBar.add(menu);
+        }
+        
         // Cоздаём шапку
         header = new JPanel();
         header.setBackground(new Color(211, 240, 228));
@@ -71,18 +85,6 @@ public class UserInterface {
         saveArea.add(save);
         header.add(saveArea, BorderLayout.WEST);
 
-        // Создание меню
-        menuBar = new JMenuBar();
-        String []menus = {"File", "Edit", "View", "Help"};
-        String [][]menuItems = {{"Open file", "Save", "Save as", "Print"}, {"Add", "Delete"}};
-        for (int i = 0; i < menus.length; i++) {
-            JMenu menu = new JMenu(menus[i]);
-            for (int j = 0; menuItems.length > i && j < menuItems[i].length; j++) {
-//                item.addActionListener(e -> {})
-                menu.add(new JMenuItem(menuItems[i][j]));
-            }
-            menuBar.add(menu);
-        }
 
         // Добавление меню
         window.setJMenuBar(menuBar);
@@ -162,6 +164,7 @@ public class UserInterface {
 
     /**
      * Создаёт поле поиска с автоматически убирающимся текстом внутри
+     *
      * @return поле поиска
      */
     private JTextField getSearchField() {

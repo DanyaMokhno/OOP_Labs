@@ -2,7 +2,6 @@
   <configuration default="false" name="UserInterface" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="UserInterface" />
     <module name="com.study_oop.Laba_2" />
-    <option name="VM_PARAMETERS" value="--add-exports java.desktop/com.apple.eawt=ALL-UNNAMED" />
     <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/out/production/com.study_oop.Laba_2" />
     <method v="2">
       <option name="Make" enabled="true" />
