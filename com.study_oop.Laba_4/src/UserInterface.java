@@ -67,10 +67,22 @@ public class UserInterface {
         String[] menus = {"File", "Edit", "View", "Help"};
         String[][] menuItems = {{"Open file", "Save", "Save as", "Print"}, {"Add", "Delete"}};
         Runnable[][] events = {{
-                () -> JOptionPane.showMessageDialog(window, "Открыть", "Открыть", JOptionPane.INFORMATION_MESSAGE),
-                () -> JOptionPane.showMessageDialog(window, "Сохранить", "Сохранить", JOptionPane.INFORMATION_MESSAGE),
-                () -> JOptionPane.showMessageDialog(window, "Сохранить как", "Сохранить как", JOptionPane.INFORMATION_MESSAGE),
-                () -> JOptionPane.showMessageDialog(window, "Печать", "Печать", JOptionPane.INFORMATION_MESSAGE)
+                () -> {
+                    java.awt.FileDialog fd = new java.awt.FileDialog(window, "open", java.awt.FileDialog.LOAD);
+                    fd.show();
+                    JOptionPane.showMessageDialog(window, fd.getDirectory()+fd.getFile(), "Открыть", JOptionPane.INFORMATION_MESSAGE);
+                },
+                () -> {
+                    JOptionPane.showMessageDialog(window, "сохранено", "Сохранить", JOptionPane.INFORMATION_MESSAGE);
+                },
+                () -> {
+                    java.awt.FileDialog fd = new java.awt.FileDialog(window, "open", java.awt.FileDialog.SAVE);
+                    fd.show();
+                    JOptionPane.showMessageDialog(window, fd.getDirectory()+fd.getFile(), "Сохранить как", JOptionPane.INFORMATION_MESSAGE);
+                },
+                () -> {
+                    JOptionPane.showMessageDialog(window, "печать", "печать", JOptionPane.INFORMATION_MESSAGE);
+                }
         }, {this::addRow, this::delRow}};
         for (int i = 0; i < menus.length; i++) {
             JMenu menu = new JMenu(menus[i]);
