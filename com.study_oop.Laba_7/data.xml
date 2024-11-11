@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<base>
+    <record client="Годунов Е. А." doctor="Смирнов В. П." date="24.09.2024" time="10:00" symptoms="Боль в горле"/>
+    <record client="Иванова А. В." doctor="Кузнецов М. И." date="25.09.2024" time="11:00" symptoms="Температура"/>
+    <record client="Сидоров К. А." doctor="Попов А. Н." date="26.09.2024" time="09:30" symptoms="Кашель"/>
+    <record client="Петрова Л. М." doctor="Соколов Б. Т." date="27.09.2024" time="14:00" symptoms="Головная боль"/>
+    <record client="Семенов И. О." doctor="Лебедев В. У." date="28.09.2024" time="15:15" symptoms="Боль в спине"/>
+    <record client="Николаев Д. Р." doctor="Козлов Г. А." date="29.09.2024" time="08:45" symptoms="Аллергия"/>
+    <record client="Федорова Е. С." doctor="Новиков Д. В." date="30.09.2024" time="13:00" symptoms="Боль в животе"/>
+    <record client="Алексеева М. Б." doctor="Морозов С. Е." date="01.10.2024" time="10:30" symptoms="Усталость"/>
+    <record client="Романов А. И." doctor="Петров Н. Ч." date="02.10.2024" time="12:00" symptoms="Бронхит"/>
+    <record client="Соловьев Д. П." doctor="Волков Р. Ш." date="03.10.2024" time="16:00" symptoms="Мигрень"/>
+</base>
