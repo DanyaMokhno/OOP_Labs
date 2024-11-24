@@ -104,7 +104,7 @@ public class Processor {
      */
     public void printFile() {
         try {
-            JasperPrint print = getReport();
+            JasperPrint print = getReport(Parser.to_xml(tableModel));
             if (print != null)
                 JasperPrintManager.printReport(print, true);
             else
@@ -120,43 +120,57 @@ public class Processor {
      * @param format Формат файла "html" или "pdf"
      */
     public void exportFile(String format) {
-        try {
-            JasperPrint print = getReport();
-            if (print != null) {
-                FileDialog fd = new FileDialog(window, "", FileDialog.SAVE);
-                fd.setDirectory(System.getProperty("user.dir"));
-                fd.setFile("Untitled." + format);
-                fd.setVisible(true);
-                String output_file_path = fd.getDirectory() + fd.getFile();
-                if (output_file_path.endsWith("pdf")) {
-                    File output_file = new File(output_file_path);
-                    JasperExportManager.exportReportToPdfFile(print, output_file.getAbsolutePath());
-                } else if (output_file_path.endsWith("html")) {
-                    File output_file = new File(output_file_path);
-                    JasperExportManager.exportReportToHtmlFile(print, output_file.getAbsolutePath());
-                }
-            } else
-                JOptionPane.showMessageDialog(window, "Ошибка при формировании отчёта", "ERROR", JOptionPane.INFORMATION_MESSAGE);
-
-        } catch (JRException e) {
-            e.printStackTrace();
-        }
+        // Этап 1: создание документа XML в отдельном потоке
+        Thread loadDataThread = new Thread(() -> {
+            try {
+                Document doc = Parser.to_xml(tableModel);
+                    // Этап 2: подготовка отчёта в другом потоке
+                    Thread generateReportThread = new Thread(() -> {
+                        JasperPrint print = getReport(doc);
+                        if (print != null) {
+                            // Этап 3: экспорт отчёта в файл в третьем потоке
+                            Thread exportFileThread = new Thread(() -> {
+                                try {
+                                    FileDialog fd = new FileDialog(window, "", FileDialog.SAVE);
+                                    fd.setDirectory(System.getProperty("user.dir"));
+                                    fd.setFile("Untitled." + format);
+                                    fd.setVisible(true);
+                                    String output_file_path = fd.getDirectory() + fd.getFile();
+                                    if (output_file_path.endsWith("pdf")) {
+                                        File output_file = new File(output_file_path);
+                                        JasperExportManager.exportReportToPdfFile(print, output_file.getAbsolutePath());
+                                    } else if (output_file_path.endsWith("html")) {
+                                        File output_file = new File(output_file_path);
+                                        JasperExportManager.exportReportToHtmlFile(print, output_file.getAbsolutePath());
+                                    }
+                                } catch (JRException e) {
+                                    e.printStackTrace();
+                                }
+                            });
+                            exportFileThread.start(); // Запуск потока экспорта
+                        } else JOptionPane.showMessageDialog(window, "Ошибка при формировании отчёта", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+                    });
+                    generateReportThread.start(); // Запуск потока генерации отчёта
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        loadDataThread.start(); // Запуск потока загрузки данных
     }
 
     /**
      * Конвертирует таблицу в объект для печати или экспорта
      *
+     * @param doc объект Document содержащий xml таблицу
      * @return объект JasperPrint для экспорта или печати или null в случае ошибки
      */
-    private JasperPrint getReport() {
+    private JasperPrint getReport(Document doc) {
         try {
-            Document doc = Parser.to_xml(tableModel);
             String template = "MyReports/data.jrxml";
             JasperReport jasperReport = JasperCompileManager.compileReport(template);
             Map params = new HashMap();
             params.put(JRXPathQueryExecuterFactory.PARAMETER_XML_DATA_DOCUMENT, doc);
-            JasperPrint print = JasperFillManager.fillReport(jasperReport, params);
-            return print;
+            return JasperFillManager.fillReport(jasperReport, params);
         } catch (JRException e) {
             e.printStackTrace();
         }
