@@ -1,0 +1,7 @@
+2024-12-14 16:26:44,990 [AWT-EventQueue-0] INFO  Processor - Открытие файла:
+2024-12-14 16:26:51,010 [AWT-EventQueue-0] DEBUG Processor - Данные успешно загружены из файла: /Users/daniilmohno/Library/Mobile Documents/com~apple~CloudDocs/Student-staff/ооп/Лабы/com.study_oop.Laba_10/data.xml
+2024-12-14 16:26:56,362 [AWT-EventQueue-0] WARN  UserInterface - Попытка удалить строку без выбора.
+2024-12-14 16:27:08,614 [AWT-EventQueue-0] INFO  UserInterface - Удаление2 строк: [1, 0]
+2024-12-14 16:27:09,310 [AWT-EventQueue-0] INFO  UserInterface - Добавлена новая строка.
+2024-12-14 16:27:09,310 [AWT-EventQueue-0] DEBUG UserInterface - Общее количество строк после добавления: 9
+2024-12-14 16:27:17,578 [AWT-EventQueue-0] WARN  UserInterface - Попытка поиска без ввода текста.
